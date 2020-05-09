@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import LikeButton from './components/1.LikeButton';
-import MouseTracker from './components/2.MouseTracker';
 // 引入自定义hook
 import useMousePosition from './hooks/useMousePosition';
+import useURLLoader from './hooks/useURLLoader'
 import './App.css';
 
+interface IShowResult {
+  message: string
+  status: string
+}
+
 const App: React.FC = () => {
-  const [show, setShow] = useState(true)
+  const [ show, setShow ] = useState(true)
   const positions = useMousePosition()
+  const [ data, loading ] = useURLLoader('https://dog.ceo/api/breeds/image/random')
+  const dogResult = data as IShowResult
   
   return (
     <div className="App">
@@ -17,7 +24,10 @@ const App: React.FC = () => {
         <p>
           <button onClick = { () => { setShow(!show) } }>Toggle Tracker</button>
         </p>
-        <p> X：{positions.x}，Y：{positions.y}</p>
+        {
+          loading ? <p>狗图正在加载...</p>:
+          <img src="" alt=""/>
+        }
         <LikeButton />
         <a
           className="App-link"
