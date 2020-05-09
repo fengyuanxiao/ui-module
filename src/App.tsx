@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
-import Hello from './components/Hello';
+import LikeButton from './components/1.LikeButton';
+import MouseTracker from './components/2.MouseTracker';
 import './App.css';
 
 const App: React.FC = () => {
+  const [show, setShow] = useState(true)
+  
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          <button onClick = { () => { setShow(!show) } }>Toggle Tracker</button>
         </p>
-        <Hello message = 'Hello World 2' />
+        <LikeButton />
         <a
           className="App-link"
           href="https://reactjs.org"
