@@ -14,7 +14,7 @@ interface IShowResult {
 const App: React.FC = () => {
   const [ show, setShow ] = useState(true)
   const positions = useMousePosition()
-  const [ data, loading ] = useURLLoader('https://dog.ceo/api/breeds/image/random')
+  const [ data, loading ] = useURLLoader('https://dog.ceo/api/breeds/image/random', [show])
   const dogResult = data as IShowResult
   
   return (
@@ -26,7 +26,7 @@ const App: React.FC = () => {
         </p>
         {
           loading ? <p>狗图正在加载...</p>:
-          <img src="" alt=""/>
+          <img src={ dogResult && dogResult.message } />
         }
         <LikeButton />
         <a
